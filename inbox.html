@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inbox - VinylHub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        /* body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-color: #f8f9fa;
+            color: #343a40;
+            font-family: Arial, sans-serif;
+        }
+
+        .navbar {
+            margin-bottom: 20px;
+        }
+
+        .table {
+            background-color: #ffffff;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            overflow: hidden;
+        } */
+
+        .table th {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .table td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background-color: #f1f3f5;
+        }
+
+        .form-label {
+            font-weight: bold;
+        }
+
+        .form-control {
+            border-radius: 5px;
+            border: 1px solid #ced4da;
+        }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        h3 {
+            margin-top: 30px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        main {
+            flex: 1;
+            padding: 20px;
+        }
+
+        footer {
+            background-color: #343a40;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+   
+       <!-- Navbar -->
+       <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+          <a class="navbar-brand" href="index.html">VinylHub</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="catalog.html">Shop Vinyls</a></li>
+              <li class="nav-item">
+                <a class="nav-link" href="create-listing.html" id="sellVinylLink">Sell Vinyl</a>
+              </li>
+              <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+              <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
+              <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+              <li class="nav-item dropdown" id="accountDropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Account
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="accountMenu">
+                  <li><a class="dropdown-item" href="manage-listings.html">Manage Listings</a></li>
+                  <li><a class="dropdown-item" href="manage-blog.html">Manage Blog Posts</a></li>
+                  <li><a class="dropdown-item" href="inbox.html">View Inbox</a></li>
+                  <li><a class="dropdown-item" href="wishlist.html" id="wishlistLink">Wishlist</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+      
+    <main class="container mt-5">
+        <h3>Inbox</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Sender</th>
+                    <th>Message</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="inboxMessages"></tbody>
+        </table>
+
+        <h3 class="mt-5">Sent Messages</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Recipient</th>
+                    <th>Message</th>
+                    <th>Time</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="sentMessages"></tbody>
+        </table>
+
+        <h3 class="mt-5">Send a Message</h3>
+        <form id="messageForm">
+            <div class="mb-3">
+                <label for="receiverUsername" class="form-label">Recipient Username</label>
+                <input type="text" id="receiverUsername" class="form-control" required>
+            </div>
+            <div class="mb-3">
+                <label for="messageContent" class="form-label">Message</label>
+                <textarea id="messageContent" class="form-control" rows="3" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 VinylHub. All Rights Reserved.</p>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="scripts/navbar.js"></script>
+    <script type="module" src="scripts/footer.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="config/firebase-config.js"></script>
+    <script type="module">
+        import { updateNavigation,requireAuth } from './scripts/auth.js';
+        updateNavigation();
+        requireAuth();
+    </script>
+    <script type="module">
+        import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
+        import { listenForMessages, sendMessage, deleteMessage } from './scripts/messaging.js';
+        import app from './config/firebase-config.js';
+
+        const auth = getAuth(app);
+
+        // Update navigation based on authentication state
+        onAuthStateChanged(auth, (user) => {
+            const accountDropdown = document.getElementById('accountDropdown');
+            const sellVinylLink = document.getElementById('sellVinylLink');
+            const wishlistLink = document.getElementById('wishlistLink');
+
+            if (user) {
+                // User is logged in
+                if (accountDropdown) accountDropdown.style.display = 'block';
+                if (sellVinylLink) sellVinylLink.style.display = 'block';
+                if (wishlistLink) wishlistLink.style.display = 'block';
+
+                // Load messages
+                const inboxMessages = document.getElementById('inboxMessages');
+                const sentMessages = document.getElementById('sentMessages');
+                listenForMessages(user.uid, inboxMessages, sentMessages, deleteMessage);
+
+                // Handle message form submission
+                const messageForm = document.getElementById('messageForm');
+                messageForm.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    const receiverUsername = document.getElementById('receiverUsername').value.trim();
+                    const messageContent = document.getElementById('messageContent').value.trim();
+
+                    if (!receiverUsername || !messageContent) {
+                        alert('All fields are required.');
+                        return;
+                    }
+
+                    try {
+                        await sendMessage(
+                            user.uid,
+                            user.displayName || 'Unknown User',
+                            receiverUsername,
+                            receiverUsername, 
+                            messageContent
+                        );
+                        alert('Message sent successfully!');
+                        messageForm.reset();
+                    } catch (error) {
+                        console.error('Error sending message:', error);
+                        alert('Failed to send message.');
+                    }
+                });
+            } else {
+                // User is not logged in
+                if (accountDropdown) accountDropdown.style.display = 'none';
+                if (sellVinylLink) sellVinylLink.style.display = 'none';
+                if (wishlistLink) wishlistLink.style.display = 'none';
+
+                alert('You must be logged in to view this page.');
+                window.location.href = 'auth.html';
+            }
+        });
+
+        // Logout functionality
+        document.getElementById('logoutButton').addEventListener('click', async (e) => {
+            e.preventDefault();
+            try {
+                await signOut(auth); // Ensure the user is signed out
+                alert('Logged out successfully!');
+                localStorage.clear(); // Clear any stored user data
+                sessionStorage.clear(); // Clear session data
+                location.reload(); // Reload the page to ensure proper state
+            } catch (error) {
+                console.error('Error logging out:', error);
+            }
+        });
+    </script>
+    <script type="module" src="scripts/messaging.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="scripts/navbar.js"></script>
+    <script type="module" src="scripts/footer.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="config/firebase-config.js"></script>
+    <script type="module">
+      import { updateNavigation,requireAuth } from './scripts/auth.js';
+      updateNavigation();
+      requireAuth();
+    </script>
+</body>
+</html>

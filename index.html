@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VinylHub - Vinyl Reselling Marketplace</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+  <style>
+  
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #f9f9f9;
+    }
+    header {
+      background-color: #1c1c1c;
+      color: white;
+    }
+    .navbar {
+      padding: 1rem 0;
+    }
+    .navbar-nav .nav-link {
+      color: #ddd;
+      transition: all 0.3s ease;
+    }
+    .navbar-nav .nav-link:hover {
+      color: #aaadb1fa ; 
+    }
+    .card {
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .card-img-top {
+      border-radius: 8px 8px 0 0;
+    }
+    .card-body {
+      padding: 1.5rem;
+    }
+    footer {
+      background-color: #1c1c1c;
+      color: white;
+      padding: 2rem 0;
+    }
+    .btn-primary {
+      background-color: #4283D9;
+      border-color: #4283D9;
+    }
+    .btn-primary:hover {
+      background-color: #aaadb1fa;
+      border-color: #aaadb1fa;
+    }
+    .container {
+      max-width: 1200px;
+    }
+    .search-bar, .filters {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .search-bar input, .filters select {
+      width: 300px;
+    }
+    .blog-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    }
+    .blog-card img {
+      width: 100%; 
+      height: auto;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .blog-card .card-body {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem;
+    }
+    .btn-black {
+      background-color: black;
+      color: white;
+      border: none;
+    }
+    .btn-black:hover {
+      background-color: #333;
+      color: white;
+    }
+    .listing-card {
+      border: 1px solid #ddd;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .listing-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    .listing-card .card-body {
+      padding: 1.5rem;
+      background-color: #f9f9f9;
+    }
+    .listing-card .card-title {
+      font-size: 1.25rem;
+      font-weight: bold;
+      color: #333;
+    }
+    .listing-card .card-text {
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">VinylHub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalog.html">Shop Vinyls</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="create-listing.html" id="sellVinylLink">Sell Vinyl</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html" id="postBlogLink" style="display: none;">Post Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item dropdown" id="accountDropdown">
+            <a class="nav-link dropdown-toggle" href="auth.html" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="accountMenu">
+              <li><a class="dropdown-item" href="manage-listings.html">Manage Listings</a></li>
+              <li><a class="dropdown-item" href="manage-blog.html">Manage Blog Posts</a></li>
+              <li><a class="dropdown-item" href="inbox.html">View Inbox</a></li>
+              <li><a class="dropdown-item" href="wishlist.html" id="wishlistLink">Wishlist</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+    <!-- Page Content -->
+    <section id="home" class="py-5 text-center bg-light">
+      <div class="container">
+        <h1>Welcome to VinylHub</h1>
+        <p>Your go-to marketplace for vinyl records!</p>
+
+        <!-- Search Bar and Filters -->
+        <div class="search-bar mb-4">
+          <input type="text" class="form-control" placeholder="Search for vinyl records...">
+          <button class="btn btn-primary">Search</button>
+        </div>
+
+        <div class="filters mb-4">
+          <select class="form-control">
+            <option>Genre</option>
+            <option>Rock</option>
+            <option>Jazz</option>
+            <option>Pop</option>
+          </select>
+          <select class="form-control">
+            <option>Price</option>
+            <option>Low to High</option>
+            <option>High to Low</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Listings Section -->
+    <section id="listings" class="py-5">
+      <div class="container">
+        <h2 class="text-center mb-5">Featured Listings</h2>
+        <div class="row">
+          <!-- Listing 1 -->
+          <div class="col-md-4">
+            <div class="card listing-card">
+              <img src="images/blacksabbath.jpg" class="card-img-top" alt="Vinyl 1">
+              <div class="card-body">
+                <h5 class="card-title">Paranoid</h5>
+                <p class="card-text">Black Sabbath</p>
+                <p class="card-text">$25.00</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-danger w-50 mr-1">Buy Now</button>
+                  <button class="btn btn-black w-50 ml-1">Offer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Listing 2 -->
+          <div class="col-md-4">
+            <div class="card listing-card">
+              <img src="images/sun_ra.jpg" class="card-img-top" alt="Vinyl record album 2">
+              <div class="card-body">
+                <h5 class="card-title">Space Is The Place</h5>
+                <p class="card-text">Sun Ra</p>
+                <p class="card-text">$40.00</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-danger w-50 mr-1">Buy Now</button>
+                  <button class="btn btn-black w-50 ml-1">Offer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Listing 3 -->
+          <div class="col-md-4">
+            <div class="card listing-card">
+              <img src="images/abbeyroad.jpg" class="card-img-top" alt="Vinyl record album 3">
+              <div class="card-body">
+                <h5 class="card-title">Abbey Road</h5>
+                <p class="card-text">The Beatles</p>
+                <p class="card-text">$30.00</p>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-danger w-50 mr-1">Buy Now</button>
+                  <button class="btn btn-black w-50 ml-1">Offer</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer Placeholder -->
+  <div id="footer"></div>
+  <footer class="bg-dark text-white text-center py-3 mt-5">
+    <p>&copy; 2025 VinylHub. All Rights Reserved.</p>
+  </footer>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script type="module" src="scripts/navbar.js"></script>
+  <script type="module" src="scripts/footer.js"></script>
+  <script type="module" src="scripts/auth.js"></script>
+  <script type="module" src="config/firebase-config.js"></script>
+  <script type="module">
+    import { updateNavigation } from './scripts/auth.js';
+    updateNavigation();
+  </script>
+
+</body>
+</html>
+

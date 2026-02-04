@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - VinylHub</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/navbar.js"></script>
+</head>
+<body class="bg-light">
+
+
+   <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">VinylHub</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="catalog.html">Shop Vinyls</a></li>
+          <li class="nav-item">
+            <a class="nav-link" href="create-listing.html" id="sellVinylLink">Sell Vinyl</a>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="blog.html" id="postBlogLink" style="display: none;">Post Blog</a></li>
+          <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+          <li class="nav-item dropdown" id="accountDropdown">
+            <a class="nav-link dropdown-toggle" href="auth.html" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Account
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="accountMenu">
+              <li><a class="dropdown-item" href="manage-listings.html">Manage Listings</a></li>
+              <li><a class="dropdown-item" href="manage-blog.html">Manage Blog Posts</a></li>
+              <li><a class="dropdown-item" href="inbox.html">View Inbox</a></li>
+              <li><a class="dropdown-item" href="wishlist.html" id="wishlistLink" >Wishlist</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+
+    
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <h1 class="text-center mb-4">Checkout</h1>
+
+        <div class="row">
+            <!-- Order Summary -->
+            <div class="col-md-4">
+                <div class="card p-3 shadow">
+                    <h5 class="text-center">Order Summary</h5>
+                    <ul class="list-group mb-3" id="orderSummary">
+                        <!-- Dynamically loaded order summary will be inserted here -->
+                    </ul>
+                    <p class="text-end fw-bold" id="subtotal"></p>
+                </div>
+            </div>
+
+            <!-- Checkout Form -->
+            <div class="col-md-8">
+                <div class="card p-4 shadow">
+                    <h5>Shipping Information</h5>
+                    <form onsubmit="placeOrder(); return false;">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Full Name:</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="address" class="form-label">Street Address:</label>
+                            <input type="text" id="address" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="city" class="form-label">City:</label>
+                            <input type="text" id="city" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="state" class="form-label">State/Province:</label>
+                            <input type="text" id="state" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="postalCode" class="form-label">Postal Code:</label>
+                            <input type="text" id="postalCode" class="form-control" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="country" class="form-label">Country:</label>
+                            <select id="country" class="form-select" required>
+                                <option value="" disabled selected>Select your country</option>
+                                <option value="US">United States</option>
+                                <option value="CA">Canada</option>
+                                <option value="UK">United Kingdom</option>
+                                <option value="AU">Australia</option>
+                            </select>
+                        </div>
+
+                        <h5>Payment Details</h5>
+
+                        <div class="mb-3">
+                            <label for="cardNumber" class="form-label">Card Number:</label>
+                            <input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456" required>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="expiry" class="form-label">Expiration Date:</label>
+                                <input type="text" id="expiry" class="form-control" placeholder="MM/YY" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="cvv" class="form-label">CVV:</label>
+                                <input type="text" id="cvv" class="form-control" placeholder="123" required>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-dark w-100">Place Order</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Placeholder -->
+    <div id="footer"></div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+      <p>&copy; 2025 VinylHub. All Rights Reserved.</p>
+    </footer>
+
+    <script type="module" src="scripts/navbar.js"></script>
+    <script type="module" src="scripts/footer.js"></script>
+    <script>
+        function placeOrder() {
+            alert('Thank you for your purchase!');
+            localStorage.removeItem('cart');
+            window.location.href = 'index.html';
+        }
+
+        function removeItemFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1); // Remove the item at the specified index
+            localStorage.setItem('cart', JSON.stringify(cart));
+            loadOrderSummary(); // Reload the order summary
+        }
+
+        function loadOrderSummary() {
+            const orderSummary = document.getElementById('orderSummary');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const subtotalElement = document.getElementById('subtotal');
+
+            if (cart.length > 0) {
+                orderSummary.innerHTML = cart.map((item, index) => `
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span>${item.title} by ${item.artist}</span>
+                        <div class="d-flex align-items-center">
+                            <strong>$${item.price.toFixed(2)}</strong>
+                            <button class="btn btn-sm btn-danger ms-2" onclick="removeItemFromCart(${index})">Remove</button>
+                        </div>
+                    </li>
+                `).join('');
+
+                const subtotal = cart.reduce((sum, item) => sum + item.price, 0);
+                subtotalElement.textContent = `Subtotal: $${subtotal.toFixed(2)}`;
+            } else {
+                orderSummary.innerHTML = '<p class="text-muted">Your cart is empty.</p>';
+                subtotalElement.textContent = '';
+            }
+        }
+
+        function addToCart(id, title, artist, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ id, title, artist, price })
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${title} has been added to your cart!`);
+        }
+
+        document.addEventListener('DOMContentLoaded', loadOrderSummary);
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

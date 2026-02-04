@@ -1,0 +1,23 @@
+{
+  "name": "ui-mockup",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "scripts/server.js",
+  "scripts": {
+    "start": "node scripts/server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "firebase": "^11.6.0",
+    "firebase-admin": "^11.11.1",
+    "multer": "1.4.5-lts.1",
+    "sanitize-html": "^2.15.0",
+    "socket.io": "^4.8.1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}

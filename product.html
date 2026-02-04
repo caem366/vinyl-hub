@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl Product</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        #productImageCarousel {
+            margin-bottom: 30px;
+        }
+        #productImageCarousel img {
+            width: 100%;
+            height: 450px;
+            object-fit: contain;
+            border-radius: 12px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+        }
+        .carousel-control-prev, 
+        .carousel-control-next {
+            background-color: rgba(0,0,0,0.2);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.7;
+        }
+        .carousel-control-prev {
+            left: 10px;
+        }
+        .carousel-control-next {
+            right: 10px;
+        }
+        .carousel-control-prev:hover, 
+        .carousel-control-next:hover {
+            opacity: 1;
+        }
+
+        /* Styles for review editing */
+        .edit-review-form {
+            padding: 16px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            margin-top: 10px;
+            width: 100%; 
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card.editing {
+            width: 100%;
+        }
+        
+        .review-content {
+            width: 100%; 
+        }
+        
+        .rating-slider {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%; /* Make rating slider full width */
+            max-width: 300px; /* But set a reasonable maximum width */
+        }
+        
+        .review-actions {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .btn-sm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+        }
+        
+        .btn-black {
+            background-color: black;
+            color: white;
+            border: none;
+        }
+        
+        .btn-black:hover {
+            background-color: #333;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">VinylHub</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="catalog.html">Shop Vinyls</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="create-listing.html" id="sellVinylLink">Sell Vinyl</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                    <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item dropdown" id="accountDropdown">
+                        <a class="nav-link dropdown-toggle" href="auth.html" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Account
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="accountMenu">
+                            <li><a class="dropdown-item" href="manage-listings.html">Manage Listings</a></li>
+                            <li><a class="dropdown-item" href="manage-blog.html">Manage Blog Posts</a></li>
+                            <li><a class="dropdown-item" href="inbox.html">View Inbox</a></li>
+                            <li><a class="dropdown-item" href="wishlist.html" id="wishlistLink">Wishlist</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mt-5">
+        <div class="mb-4">
+            <a href="catalog.html" class="btn btn-secondary">Back to Catalog</a>
+        </div>
+        <div class="row">
+            <!-- Vinyl Image -->
+            <div class="col-md-5">
+                <div id="productImageCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner" id="productImages">
+                        <!-- Images will be dynamically inserted here -->
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productImageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productImageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-7">
+                <h1 id="productTitle"></h1>
+                <p><strong>Artist:</strong> 
+                    <a id="artistLink" class="text-decoration-none" style="color: gray;">
+                        <span id="productArtist"></span>
+                    </a>
+                </p>
+                <p class="lead" id="productPrice"></p>
+
+                <p><strong>Condition:</strong> <span id="productCondition"></span></p>
+                <p><strong>Genre:</strong> 
+                    <a id="genreLink" class="text-decoration-none" style="color: gray;">
+                        <span id="productGenre"></span>
+                    </a>
+                </p>
+                <p id="productDescription"></p>
+
+                <button class="btn btn-dark btn-lg" onclick="addToCart()">Add to Cart</button>
+                <button class="btn btn-secondary btn-lg" onclick="window.addToWishlist()">Add to Wishlist</button>
+            </div>
+        </div>
+        
+        <!-- Reviews Section -->
+        <div class="mt-5">
+            <h3>Customer Reviews</h3>
+            <div id="reviewsContainer" class="mb-4">
+                <!-- Dynamically loaded reviews will appear here -->
+            </div>
+            <div class="mt-4">
+                <h5>Leave a Review:</h5>
+                <form id="reviewForm">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" id="reviewerName" placeholder="Your Name" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="reviewRating" class="form-label">Rating:</label>
+                        <div id="reviewRating" class="rating-slider">
+                            <input type="range" id="ratingSlider" min="1" max="5" step="1" value="3" oninput="updateStarRating(this.value)">
+                            <div id="starDisplay" class="stars">★★★☆☆</div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <textarea class="form-control" id="reviewContent" rows="3" placeholder="Write a review..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-dark">Submit Review</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 VinylHub. All Rights Reserved.</p>
+    </footer>
+    
+    <script>
+        function addToCart() {
+            const listingId = localStorage.getItem('currentListingId');
+            if (!listingId) {
+                alert('No listing ID found.');
+                return;
+            }
+
+            const albumTitle = document.getElementById('productTitle').textContent;
+            const artist = document.getElementById('productArtist').textContent;
+            const price = parseFloat(document.getElementById('productPrice').textContent.replace('$', ''));
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ id: listingId, title: albumTitle, artist, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            alert(`${albumTitle} has been added to your cart!`);
+        }
+        
+        function updateStarRating(value) {
+            const starDisplay = document.getElementById('starDisplay');
+            starDisplay.textContent = '★'.repeat(value) + '☆'.repeat(5 - value);
+        }
+    </script>
+    
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.4.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Firebase setup - Load this first -->
+    <script type="module">
+        import app from './config/firebase-config.js';
+        import { getAuth, onAuthStateChanged } from 'https://www.gstatic.com/firebasejs/9.10.0/firebase-auth.js';
+
+        const auth = getAuth(app);
+        window.auth = auth; // Make auth available globally
+
+        // Update navigation based on authentication state
+        onAuthStateChanged(auth, (user) => {
+            console.log('Auth state changed:', user ? user.uid : 'Not logged in');
+            const accountDropdown = document.getElementById('accountDropdown');
+            const accountMenu = document.getElementById('accountMenu');
+
+            if (user) {
+                // User is logged in
+                if (accountDropdown) accountDropdown.style.display = 'block';
+                if (accountMenu) {
+                    accountMenu.textContent = 'Account';
+                    accountMenu.setAttribute('data-bs-toggle', 'dropdown');
+                }
+            } else {
+                // User is not logged in
+                if (accountDropdown) accountDropdown.style.display = 'none';
+                if (accountMenu) {
+                    accountMenu.innerHTML = '<a class="nav-link" href="auth.html">Login</a>';
+                    accountMenu.removeAttribute('data-bs-toggle');
+                }
+            }
+        });
+    </script>
+    
+    <!-- Import our app scripts - products.js will handle all review functionality -->
+    <script type="module" src="scripts/navbar.js"></script>
+    <script type="module" src="scripts/footer.js"></script>
+    <script type="module" src="scripts/auth.js"></script>
+    <script type="module" src="scripts/products.js"></script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /listings/{document=**} {
+      allow read: if true; // Allow read access to everyone
+      allow write: if request.auth != null; // Restrict write access to authenticated users
+    }
+    match /products/{productId}/reviews/{reviewId} {
+      allow read, write: if request.auth != null;
+    }
+    match /blogs/{blogId} {
+      allow read: if true; // Allow read access to everyone
+      allow write: if request.auth != null; // Restrict write access to authenticated users
+    }
+    match /messages/{messageId} {
+      allow read, write: if request.auth != null; // Allow access for authenticated users
+    }
+    match /users/{userId} {
+      allow read: if request.auth != null; // Allow authenticated users to read
+      allow write: if request.auth != null && request.resource.data.keys().hasAll(['username', 'email', 'role', 'createdAt']) &&
+                   request.resource.data.username is string &&
+                   request.resource.data.email is string &&
+                   request.resource.data.role is string &&
+                   request.resource.data.createdAt is timestamp; // Validate required fields
+    }
+    match /blogcomments/{commentId} {
+      allow read: if true; // Allow everyone to read comments
+      allow write: if request.auth != null; // Allow only authenticated users to write comments
+    }
+  }
+}

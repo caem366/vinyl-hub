@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinyl Product - Dark Side of the Moon</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <script>
+        function loadHTML(elementId, filePath) {
+            fetch(filePath)
+                .then(response => response.text())
+                .then(data => document.getElementById(elementId).innerHTML = data)
+                .catch(error => console.error('Error loading ' + filePath, error));
+        }
+
+        document.addEventListener("DOMContentLoaded", function () {
+            loadHTML("navbar", "navbar.html");
+            loadHTML("footer", "footer.html");
+        });
+
+        function addToCart(title, artist, price) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.push({ title, artist, price });
+            localStorage.setItem('cart', JSON.stringify(cart));
+            alert(`${title} has been added to your cart!`);
+        }
+    </script>
+</head>
+<body class="bg-light">
+
+   <!-- Navbar -->
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="index.html">VinylHub</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="catalog.html">Shop Vinyls</a></li>
+                <li class="nav-item">
+                    <a class="nav-link" href="create-listing.html" id="sellVinylLink">Sell Vinyl</a>
+                </li>
+                <li class="nav-item"><a class="nav-link" href="blog.html">Blog</a></li>
+                <li class="nav-item"><a class="nav-link" href="checkout.html">Cart</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                <li class="nav-item dropdown" id="accountDropdown">
+                    <a class="nav-link dropdown-toggle" href="auth.html" id="accountMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Account
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="accountMenu">
+                        <!-- <li><a class="dropdown-item" href="auth.html">Login / Register</a></li> -->
+                        <li><a class="dropdown-item" href="wishlist.html" id="wishlistLink">Wishlist</a></li>
+                        <li><a class="dropdown-item" href="manage-listings.html">Manage Listings</a></li>
+                        <li><a class="dropdown-item" href="manage-blog.html">Manage Blog Posts</a></li>
+                        <li><a class="dropdown-item" href="inbox.html">View Inbox</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="#" id="logoutButton">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <!-- Vinyl Image -->
+            <div class="col-md-5">
+                <img src="dark_side_of_moon.jpg" class="img-fluid rounded shadow" alt="Dark Side of the Moon Vinyl">
+            </div>
+
+            <!-- Product Details -->
+            <div class="col-md-7">
+                <h1>Dark Side of the Moon</h1>
+                <h4 class="text-muted">Pink Floyd</h4>
+                <p class="lead">$30.00</p>
+
+                <p><strong>Condition:</strong> Near Mint (NM)</p>
+                <p><strong>Genre:</strong> Progressive Rock</p>
+                <p>
+                    One of the greatest albums of all time. This original pressing of 
+                    <em>Dark Side of the Moon</em> is in **Near Mint** condition, with minimal signs of wear.
+                </p>
+
+                <button class="btn btn-dark btn-lg" onclick="addToCart('Dark Side of the Moon', 'Pink Floyd', 30.00)">Add to Cart</button>
+            </div>
+        </div>
+
+       
+
+    <div id="footer"></div>
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+        <p>&copy; 2025 VinylHub. All Rights Reserved.</p>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="scripts/products.js"></script>
+</body>
+</html>
